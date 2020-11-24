@@ -1,0 +1,36 @@
+$border-grey: #707070;
+$white: #ffffff;
+$black: #000000;
+$bg-grey: #faf9f9;
+$strong-red: #e00000;
+$placeholder-grey: #a59a9a;
+$placeholder-blk: #000000;
+$blue-dabadee: #0058ae;
+$filter-red: #ff0000;
+$juicy-red: #fe0000;
+$transparent-red: #e00000;
+$info-grey: #808080;
+$secondary-grey: #b4b4b4;
+$ht: 10.5vh;
+
+.MainWrapper {
+	width: 100vw;
+	height: $ht;
+	background: $strong-red;
+	box-shadow: 0px 10px 30px #b8121229;
+	display: flex;
+	justify-content: space-between;
+}
+.LogoWrapper {
+	width: 14.5%;
+	height: 0%;
+	border-bottom: $ht solid white;
+	border-right: 40px solid transparent;
+}
+.logo {
+	width: 90%;
+    height: 12vh;
+    margin-left: 10%;
+    margin-top: -2.75%;
+	transform: matrix(1, 0.07, -0.07, 1, 0, 0);
+}
