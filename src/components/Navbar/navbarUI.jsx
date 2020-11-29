@@ -1,12 +1,13 @@
 import "./navbar.scss"
-import logo from "../../images/served.png"
 
 const Display = props => (
 	<div className="MainWrapper">
 		<div className="LogoWrapper">
-			<img src={logo} alt="logo" className="logo" />
+			<button className="logo">$erved.</button>
 		</div>
-		<button></button>
+		<button id="LoginBtn" className="LoginBtn">
+			Login
+		</button>
 	</div>
 )
 

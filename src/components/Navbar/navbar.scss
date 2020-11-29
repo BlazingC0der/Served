@@ -1,10 +1,7 @@
 $border-grey: #707070;
-$white: #ffffff;
-$black: #000000;
 $bg-grey: #faf9f9;
 $strong-red: #e00000;
 $placeholder-grey: #a59a9a;
-$placeholder-blk: #000000;
 $blue-dabadee: #0058ae;
 $filter-red: #ff0000;
 $juicy-red: #fe0000;
@@ -13,8 +10,15 @@ $info-grey: #808080;
 $secondary-grey: #b4b4b4;
 $ht: 10.5vh;
 
+@font-face {
+	src: url(../../fonts/acratica.OTF);
+	font-family: acratica;
+}
+
 .MainWrapper {
-	width: 100vw;
+	position: sticky;
+	z-index: 1;
+	width: 100%;
 	height: $ht;
 	background: $strong-red;
 	box-shadow: 0px 10px 30px #b8121229;
@@ -28,9 +32,33 @@ $ht: 10.5vh;
 	border-right: 40px solid transparent;
 }
 .logo {
-	width: 90%;
-    height: 12vh;
-    margin-left: 10%;
-    margin-top: -2.75%;
+	margin-left: 15%;
+	margin-top: -2%;
 	transform: matrix(1, 0.07, -0.07, 1, 0, 0);
+	font: bolder 5vmax acratica;
+	color: $juicy-red;
+	transition: 0.5s;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	&:hover {
+		margin-left: 5%;
+		text-shadow: 0 0 10px #e20b0bbe;
+		font-size: 5.5vmax;
+	}
+}
+.LoginBtn {
+	display: block;
+	width: 11.5%;
+	height: 57.6%;
+	background: white;
+	border: none;
+	border-radius: 38px;
+	margin-top: 1%;
+	margin-right: 2%;
+	text-align: center;
+	font: 2.2vmax/16px Forte;
+	letter-spacing: 4px;
+	cursor: pointer;
+	color: $strong-red;
 }
