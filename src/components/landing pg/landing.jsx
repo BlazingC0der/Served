@@ -7,6 +7,8 @@ import BuyerPic from "../../images/phone.jpg"
 import Modal from "@material-ui/core/Modal"
 import Fade from "@material-ui/core/Fade"
 import Backdrop from "@material-ui/core/Backdrop"
+import { GoogleLogin } from "react-google-login"
+import FacebookLogin from "react-facebook-login"
 
 class Landing extends Component {
 	constructor(props) {
@@ -21,13 +23,11 @@ class Landing extends Component {
 	ModalCloser = () => {
 		this.setState({ OpenModal: false })
 	}
-	onSignIn = googleUser => {
-		var profile = googleUser.getBasicProfile()
-		console.log(1)
-		console.log("ID: " + profile.getId()) // Do not send to your backend! Use an ID token instead.
-		console.log("Name: " + profile.getName())
-		console.log("Image URL: " + profile.getImageUrl())
-		console.log("Email: " + profile.getEmail()) // This is null if the 'email' scope is not present.
+	GoogleSignInHandle = googleUser => {
+		console.log(googleUser)
+	}
+	FbSignInHandle = FbUser => {
+		console.log(FbUser)
 	}
 
 	render() {
@@ -78,7 +78,21 @@ class Landing extends Component {
 					<Fade in={this.state.OpenModal}>
 						<div className="LoginModal">
 							<h1 className="ModalTitle">Login</h1>
-							<div className="g-signin2" data-onsuccess={this.onSignIn}></div>
+							<GoogleLogin
+								clientId="138218954242-q8dualdjvvdfbesve58tdco3en2c6cm9.apps.googleusercontent.com"
+								buttonText="Login"
+								onSuccess={this.GoogleSignInHandle}
+								onFailure={this.GoogleSignInHandle}
+								cookiePolicy={"single_host_origin"}
+							/>
+							<span>Or</span>
+							<FacebookLogin
+								appId="1088597931155576"
+								autoLoad={true}
+								fields="name,email,picture"
+								//onClick={componentClicked}
+								callback={this.FbSignInHandle}
+							/>
 						</div>
 					</Fade>
 				</Modal>

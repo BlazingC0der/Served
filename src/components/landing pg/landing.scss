@@ -129,8 +129,14 @@ $secondary-grey: #b4b4b4;
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-evenly;
+	>span{
+		font-size: 2vmax;
+		font-weight: bolder;
+		color: $info-grey;
+	}
 }
 .ModalTitle{
 	color: $juicy-red;
 	font-size: 4vmax;
+	margin-top: -7.5%;
 }
