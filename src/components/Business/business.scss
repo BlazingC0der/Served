@@ -1,0 +1,91 @@
+$filter-red: #ff0000;
+$strong-red: #e00000;
+$border-grey: #707070;
+$bg-grey: #faf9f9;
+$placeholder-grey: #a59a9a;
+$info-grey: #808080;
+$secondary-grey: #b4b4b4;
+
+@font-face {
+	src: url(../../fonts/acratica.OTF);
+	font-family: acratica;
+}
+
+.Outline {
+    box-shadow: 10px 10px 20px 16px #00000029;
+    position: absolute;
+    left: 16%;
+	width: 45%;
+    height: 60vh;
+    top: 15vh;
+    margin-bottom: 5vh;
+    border-radius: 15px;
+}
+.div_1 {
+    width: 50%;
+    border-bottom: 5px solid $filter-red;
+}
+.div_2 {
+   width: max-content;
+   margin-bottom: -3vh;
+}
+.title{
+    color: $filter-red;
+    letter-spacing: 1px;
+    margin-left: 5vh;
+}
+.desc{
+    margin-top: 7vh;
+    margin-left: 5vh;
+    color: $info-grey;
+    font-size: -1px;
+}
+.rates{
+    position: absolute;
+    left: 4vw;
+    top: 28vh;
+    color: $strong-red;
+    letter-spacing: 2px;
+}
+.rates-hourly{
+    margin-top: -3vh;
+}
+.headerDivider{
+    border: 1px solid $strong-red;
+    height:12vh;
+    position:absolute;
+    right:27vw;
+    top:32vh;
+}
+.orders{
+    position: absolute;
+    left: 20vw;
+    top: 28vh;
+    color: $strong-red;
+    letter-spacing: 2px;
+}
+.orders-success{
+    margin-top: -3vh;
+}
+.dollar{
+    width: 3vh;
+}
+.firstB{
+    position: absolute;
+    top: 20vh;
+    left: 3vw;
+}
+.secondB{
+    position: absolute;
+    top: 20vh;
+    left: 5vw;
+}
+.back{
+    position: absolute;
+    left: 1vw;
+    width: 2vh;
+}
+.back-text{
+    position: absolute;
+    left: 2.2vw;
+}
