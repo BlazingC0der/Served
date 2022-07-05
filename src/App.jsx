@@ -4,24 +4,27 @@ import { BrowserRouter as Router } from "react-router-dom"
 import Logo from "./images/served.png"
 import "./App.scss"
 import Footer from "./components/footer/footer"
-import Landing from './components/landing pg/landing'
+import Landing from "./components/landing pg/landing"
+import BuyerMain from './components/buyer/buyerMain'
+import Services from "./components/buyer/services"
 
 function App() {
 	return (
 		<>
 			<div className="App">
-				<Navbar />
-				<img src={Logo} alt="logo" className="BgLogo" />
 				<Router>
+					<Navbar />
+					<img src={Logo} alt="logo" className="BgLogo" />
+					{/* <Services /> */}
 					<Switch>
 						<Route path="/" exact component={Landing} />
 						<Route path="/register" component="" />
-						<Route path="/buyer" component="" />
+						<Route path="/buyer" component={BuyerMain} />
 						<Route path="/seller" component="" />
 					</Switch>
 				</Router>
+				<Footer />
 			</div>
-			<Footer />
 		</>
 	)
 }

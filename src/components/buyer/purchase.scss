@@ -1,0 +1,45 @@
+$border-grey: #707070;
+$bg-grey: #faf9f9;
+$strong-red: #e00000;
+$placeholder-grey: #a59a9a;
+$blue-dabadee: #0058ae;
+$filter-red: #ff0000;
+$juicy-red: #fe0000;
+$transparent-red: #e00000cb;
+$info-grey: #808080;
+$secondary-grey: #b4b4b4;
+
+.ServiceWrapper {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-content: space-around;
+	width: 95%;
+	margin-left: 2.5%;
+}
+.ServiceCard {
+	border: 1px solid $border-grey;
+	background: #ffffff;
+	height: 27.6vh;
+	width: 20%;
+	margin-bottom: 5%;
+	border-radius: 20px;
+}
+.BizName {
+	color: $juicy-red;
+	font-family: "Roboto", sans-serif;
+	margin-left: 3%;
+}
+.BizIntro {
+	color: $info-grey;
+	text-align: left;
+	font: bold 1.2vmax Roboto;
+	letter-spacing: 2.94px;
+	margin-left: 5%;
+}
+.rate {
+	font: bold Roboto;
+	letter-spacing: 2.23px;
+	color: $transparent-red;
+	margin-left: 5%;
+}

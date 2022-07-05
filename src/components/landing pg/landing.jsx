@@ -14,7 +14,12 @@ class Landing extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			OpenModal: true,
+			OpenModal: false,
+		}
+	}
+	componentDidMount() {
+		if (localStorage.getItem("SignedIn")) {
+			this.props.history.goBack()
 		}
 	}
 	ModalOpener = () => {
@@ -25,6 +30,20 @@ class Landing extends Component {
 	}
 	GoogleSignInHandle = googleUser => {
 		console.log(googleUser)
+		let profile = googleUser.getBasicProfile()
+		if (localStorage.getItem("user") === null) {
+			localStorage.setItem("user", profile.getId())
+			this.props.history.push({
+				pathName: "/register",
+				state: { Name: profile.getName(), Email: profile.getEmail() },
+			})
+		} else {
+			sessionStorage.setItem("SignedIn", true)
+			this.props.history.replace({
+				pathName: "/buyer",
+				state: { Name: profile.getName(), Email: profile.getEmail() },
+			})
+		}
 	}
 	FbSignInHandle = FbUser => {
 		console.log(FbUser)

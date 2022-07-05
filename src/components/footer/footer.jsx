@@ -8,7 +8,7 @@ class Footer extends Component {
 			document.getElementById("FootWrapper").style.height = "8vh"
 			document.getElementById("FootWrapper").style.clipPath =
 				"polygon(0 0, 100% 61%, 100% 100%, 0% 100%)"
-			document.getElementById("LogoSm").style.marginTop="0.5%"
+			document.getElementById("LogoSm").style.marginTop="0.5%" 
 		}
 	}
 	render() {
