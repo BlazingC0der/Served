@@ -1,77 +1,94 @@
-import React, { Component } from "react"
+import React, { useState, useEffect } from "react"
 import GoogleMapReact from "google-map-react"
-import "./map.scss"
+import "./map.css"
 import axios from "axios"
+import { useForkRef } from "@material-ui/core"
 
-class Map extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			zoom: 10,
-			address: "",
-			coords: {},
-			map: null,
-			maps: null,
-			marker: null,
-		}
+const Map = (props) => {
+	const [zoom, setZoom] = useState(10)
+	const [marker, setMarker] = useState(null)
+	const [maps, setMaps] = useState(null)
+	const [map, setMap] = useState(null)
+	const [coords, setCoords] = useState({})
+	const [address, setAddress] = useState("")
+
+	const MarkerSetter = (Marker) => {
+		setMarker(Marker)
+		return new Promise((resolve) => {
+			resolve()
+		})
 	}
-	componentDidMount() {
+
+	const CoordsSetter = (coords) => {
+		setCoords(coords)
+		return new Promise((resolve) => {
+			resolve()
+		})
+	}
+
+	const MarkerSetter2 = (marker) => {
+		setMarker(marker)
+		return new Promise((resolve) => {
+			resolve()
+		})
+	}
+
+	useEffect(() => {
 		if ("geolocation" in navigator) {
 			navigator.geolocation.getCurrentPosition(position => {
-				this.setState(
-					{
-						coords: {
-							lat: position.coords.latitude,
-							lng: position.coords.longitude,
-						},
-					},
-					() => {
-						axios
-							.get(
-								`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.coords.lat}, ${this.state.coords.lng}&key=AIzaSyCqcsAR-DOZvYs2_aSCVpe2tJ3lBG3KKLE`
-							)
-							.then(res => {
-								/* let LongAddress = res.results.formatted_address.split(",")
-						let ShortAddress = LongAddress[0]+","+LongAddress[1] 
-						set state for address*/
-								console.log(res)
-							})
-					}
+				setCoords({
+					lat: position.coords.latitude,
+					lng: position.coords.longitude,
+				}
 				)
 				console.log(position.coords.latitude, position.coords.longitude)
 			})
 		}
-	}
-	InitMap = (Map, Maps) => {
-		this.setState({ map: Map, maps: Maps })
+	}, [])
+
+	useEffect(() => {
+		axios
+			.get(
+				`https://maps.googleapis.com/maps/api/geocode/json?latlng=${coords.lat}, ${coords.lng}&key=AIzaSyCqcsAR-DOZvYs2_aSCVpe2tJ3lBG3KKLE`
+			)
+			.then(res => {
+				/* let LongAddress = res.results.formatted_address.split(",")
+		let ShortAddress = LongAddress[0]+","+LongAddress[1] 
+		set state for address*/
+				console.log(res)
+			})
+	}, [coords])
+
+	const InitMap = (Map, Maps) => {
+		setMap(Map)
+		setMaps(Maps)
 		let Marker = new Maps.Marker({
-			position: this.state.coords,
+			position: coords,
 			Map,
-			animation: this.state.maps.Animation.DROP,
+			animation: Maps.Animation.DROP,
 			draggable: true,
 		})
-		this.setState({ marker: Marker }, () => {
-			// Create the search box and link it to the UI element.
+		MarkerSetter2(Marker).then(() => {
 			const input = document.getElementById("pac-input")
-			const searchBox = new Maps.places.Autocomplete(input)
-			this.state.map.controls[this.state.maps.ControlPosition.TOP_LEFT].push(
+			const SearchBox = new Maps.places.Autocomplete(input)
+			Map.controls[Maps.ControlPosition.TOP_LEFT].push(
 				input
 			)
 			// Bias the SearchBox results towards current map's viewport.
-			this.state.map.addListener("bounds_changed", () => {
-				searchBox.setBounds(this.state.map.getBounds())
+			Map.addListener("bounds_changed", () => {
+				SearchBox.setBounds(Map.getBounds())
 			})
 			// Listen for the event fired when the user selects a prediction and retrieve
 			// more details for that place.
-			searchBox.addListener("places_changed", () => {
-				const places = searchBox.getPlaces()
+			SearchBox.addListener("places_changed", () => {
+				const places = SearchBox.getPlaces()
 				if (places.length === 0) {
 					return
 				}
 				// Clear out the old markers.
-				this.state.marker.setMap(null)
+				marker.setMap(null)
 				// For each place, get the icon, name and location.
-				const bounds = new this.state.maps.LatLngBounds()
+				const bounds = new Maps.LatLngBounds()
 				places.forEach(place => {
 					if (!place.geometry || !place.geometry.location) {
 						console.log("Returned place contains no geometry")
@@ -79,18 +96,17 @@ class Map extends Component {
 					}
 					const icon = {
 						url: place.icon,
-						size: new this.state.maps.Size(71, 71),
-						origin: new this.state.maps.Point(0, 0),
-						anchor: new this.state.maps.Point(17, 34),
-						scaledSize: new this.state.maps.Size(25, 25),
+						size: new Maps.Size(71, 71),
+						origin: new Maps.Point(0, 0),
+						anchor: new Maps.Point(17, 34),
+						scaledSize: new Maps.Size(25, 25),
 					}
 					// Create a marker for each place.
-					let Map = this.state.map
-					let Marker = new this.state.maps.Marker({
+					let Marker = new Maps.Marker({
 						Map,
 						icon,
 						title: place.name,
-						animation: this.state.maps.Animation.DROP,
+						animation: Maps.Animation.DROP,
 						position: place.geometry.location,
 					})
 					if (place.geometry.viewport) {
@@ -99,30 +115,27 @@ class Map extends Component {
 					} else {
 						bounds.extend(place.geometry.location)
 					}
-					this.setState({ marker: Marker }, () =>
-						this.setState({ coords: this.state.marker.getPosition() })
-					)
+					MarkerSetter(Marker).then(() => setCoords(marker.getPosition()))
 				})
-				this.state.map.fitBounds(bounds)
+				Map.fitBounds(bounds)
 			})
 		})
 	}
-	ClickHandle = ({ x, y, lat, lng, event }) => {
+	const ClickHandle = ({ x, y, lat, lng, event }) => {
 		console.log(lat, lng)
-		this.setState({ coords: { lat: lat, lng: lng } }, () => {
-			console.log("state", this.state.coords)
-			this.state.marker.setMap(null)
-			let Map = this.state.map
-			let Marker = new this.state.maps.Marker({
-				position: this.state.coords,
-				Map,
-				animation: this.state.maps.Animation.DROP,
+		CoordsSetter({ lat: lat, lng: lng }).then(() => {
+			console.log("state", coords)
+			marker.setMap(null)
+			let Marker = new maps.Marker({
+				position: coords,
+				map,
+				animation: maps.Animation.DROP,
 				draggable: true,
 			})
-			this.setState({ marker: Marker })
+			setMarker(Marker)
 			axios
 				.get(
-					`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.coords.lat}, ${this.state.coords.lng}&key=AIzaSyCqcsAR-DOZvYs2_aSCVpe2tJ3lBG3KKLE`
+					`https://maps.googleapis.com/maps/api/geocode/json?latlng=${coords.lat}, ${coords.lng}&key=AIzaSyCqcsAR-DOZvYs2_aSCVpe2tJ3lBG3KKLE`
 				)
 				.then(res => {
 					/* let LongAddress = res.results.formatted_address.split(",")
@@ -132,33 +145,32 @@ class Map extends Component {
 				})
 		})
 	}
-	render() {
-		return (
-			<>
-				<input
-					id="pac-input"
-					className="controls"
-					type="text"
-					placeholder="Search..."
-				/>
-				<GoogleMapReact
-					bootstrapURLKeys={{
-						key: "AIzaSyCqcsAR-DOZvYs2_aSCVpe2tJ3lBG3KKLE",
-						libraries: ["places"],
-					}}
-					center={this.state.coords}
-					zoom={this.state.zoom}
-					yesIWantToUseGoogleMapApiInternals
-					onGoogleApiLoaded={({ map, maps }) => this.InitMap(map, maps)}
-					onClick={this.ClickHandle}
-				></GoogleMapReact>
-				<div className="AddressWrapper">
-					<h2>{`${this.state.coords.lat} ${this.state.coords.lng}`}</h2>
-					<button className="MapBtn" onClick={()=>this.props.LocHandle(this.state.coords)}>Confirm Address</button>
-				</div>
-			</>
-		)
-	}
+
+	return (
+		<>
+			<input
+				id="pac-input"
+				className="controls"
+				type="text"
+				placeholder="Search..."
+			/>
+			<GoogleMapReact
+				bootstrapURLKeys={{
+					key: "AIzaSyCqcsAR-DOZvYs2_aSCVpe2tJ3lBG3KKLE",
+					libraries: ["places"],
+				}}
+				center={coords}
+				zoom={zoom}
+				yesIWantToUseGoogleMapApiInternals
+				onGoogleApiLoaded={({ map, maps }) => InitMap(map, maps)}
+				onClick={ClickHandle}
+			></GoogleMapReact>
+			<div className="AddressWrapper">
+				<h2>{`${coords.lat} ${coords.lng}`}</h2>
+				<button className="MapBtn" onClick={() => props.LocHandle(coords)}>Confirm Address</button>
+			</div>
+		</>
+	)
 }
 
 export default Map

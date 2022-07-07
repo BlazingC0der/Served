@@ -1,0 +1,156 @@
+:root {
+    --border-grey: #707070;
+    --bg-grey: #faf9f9;
+    --strong-red: #e00000;
+    --placeholder-grey: #a59a9a;
+    --blue-dabadee: #0058ae;
+    --filter-red: #ff00009d;
+    --juicy-red: #fe0000;
+    --transparent-red: #e00000;
+    --info-grey: #808080;
+    --secondary-grey: #b4b4b4
+}
+
+.header {
+    position: relative;
+    flex-direction: column;
+    z-index: 1;
+    height: 85vh;
+    background-color: #ff0000b3;
+    margin-top: -11.5%
+}
+
+.HeaderBg {
+    margin-top: -80%;
+    width: 100%
+}
+
+.description {
+    font: 3vmax/1.4 Bahnschrift;
+    letter-spacing: .38px;
+    color: #fff;
+    margin-left: 5%
+}
+
+.Logo {
+    margin-top: 3%;
+    margin-left: 5%;
+    height: 25%;
+    margin-bottom: -2%
+}
+
+.CardWrapper {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 90vh;
+    background-color: var(--bg-grey);
+}
+
+.slope {
+    position: relative;
+    z-index: 2;
+    height: 20vh;
+    width: 0;
+    border-top: 30vh solid transparent;
+    border-right: 100vw solid var(--bg-grey);
+    margin-bottom: 0;
+    margin-top: -20%
+}
+
+.LoginCard {
+    box-shadow: -10px 20px 16px #00000029;
+    width: 30%;
+    height: 68.6vh;
+    border-radius: 35px;
+    background-color: #fff;
+    z-index: 3;
+    overflow: hidden;
+    margin-top: -22%;
+    transition: .15s
+}
+
+.LoginCard:hover img {
+    opacity: 1
+}
+
+.seller {
+    margin-top: -32%
+}
+
+.CardImg {
+    opacity: .3;
+    height: 30%;
+    width: 100%;
+    -o-object-fit: cover;
+    object-fit: cover
+}
+
+.CardTitle {
+    color: var(--juicy-red);
+    font: bold 4.5vmax/24px Arial;
+    letter-spacing: 2px;
+    margin-left: 3%;
+    margin-top: 8%
+}
+
+.CardTxt {
+    color: var(--info-grey);
+    font: 1.75vmax Arial;
+    margin-left: 3%
+}
+
+.LoginButton {
+    background: var(--strong-red);
+    box-shadow: 0px 8px 30px #c0181899;
+    border-radius: 47px;
+    border: none;
+    color: #fff;
+    text-align: center;
+    font: 2.3vmax Forte;
+    width: 40%;
+    height: 12%;
+    cursor: pointer;
+    margin-left: 30%;
+    margin-top: 3%;
+    transition: .5s
+}
+
+.LoginButton:hover {
+    background: linear-gradient(138deg, #6e0a0a 0%, red 100%);
+    height: 14%;
+    width: 50%;
+    margin-left: 25%
+}
+
+.sell {
+    margin-top: 16%
+}
+
+.LoginModal {
+    height: 75vh;
+    width: 50vw;
+    margin-left: 25vw;
+    margin-top: 12.5vh;
+    background-color: #fff;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly
+}
+
+.LoginModal>span {
+    font-size: 2vmax;
+    font-weight: bolder;
+    color: var(--info-grey)
+}
+
+.ModalTitle {
+    color: var(--juicy-red);
+    font-size: 4vmax;
+    margin-top: -7.5%
+}

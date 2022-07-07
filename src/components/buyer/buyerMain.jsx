@@ -1,4 +1,6 @@
+import React from 'react'
 import ServiceSelect from './purchase'
+
 const BuyerMain = () => (
     <>
         <route path="buyer/" exact component="" />

@@ -1,0 +1,15 @@
+.BgLogo {
+	position: fixed;
+	z-index: -1;
+	width: 55%;
+	height: 60vh;
+	transform: matrix(0.62, -0.79, 0.79, 0.62, 0, 0);
+	opacity: 0.54;
+	filter: blur(6px);
+	margin-left: 35%;
+	top: 15%;
+}
+.App {
+	width: 100vw;
+	min-height: 100vh;
+}

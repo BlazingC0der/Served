@@ -1,0 +1,87 @@
+:root {
+  --border-grey: #707070;
+  --bg-grey: #faf9f9;
+  --strong-red: #e00000;
+  --placeholder-grey: #a59a9a;
+  --blue-dabadee: #0058ae;
+  --filter-red: #ff0000;
+  --juicy-red: #fe0000;
+  --transparent-red: #e00000;
+  --info-grey: #808080;
+  --secondary-grey: #b4b4b4;
+}
+
+.main-wrapper {
+  height: 50vh;
+  filter: drop-shadow(-1px 5px 3px #ccc);
+  margin-bottom: 0%;
+}
+
+.info-wrapper {
+  width: 95vw;
+  background-color: white;
+}
+
+.map-details {
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.map-details span {
+  font-weight: bold;
+}
+
+.search-input {
+  font-size: 1.2em;
+  width: 100%;
+}
+
+.search {
+  position: absolute;
+  z-index: 1;
+  left: 40%;
+}
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 37.5%;
+  text-overflow: ellipsis;
+  width: 25%;
+  height: 10%;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+
+.pac-container {
+  z-index: 100000;
+}
+
+.MapBtn {
+  background: var(--strong-red);
+  box-shadow: 2px 3px 10px #0000008c;
+  border-radius: 33px;
+  border: none;
+  height: 6.5vh;
+  width: 10.3vw;
+  cursor: pointer;
+  font: 1rem/46px Roboto;
+  letter-spacing: 0.31px;
+  color: #ffffff;
+}
+
+h2 {
+  color: var(--info-grey);
+}
+
+.AddressWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 25vh;
+}
